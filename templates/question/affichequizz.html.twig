@@ -1,0 +1,48 @@
+{% extends 'front.html.twig' %}
+{% block title %}Passer quizz {% endblock %}
+{% block baniere%}
+    <div class="breadcrumbs" data-aos="fade-in">
+        <div class="container">
+            <h2>Compétences évaluées</h2>
+            <p>Vous pouvez passer ce quiz dès maintenant.
+
+                Si vous échouez, vous pourrez repasser ce quiz dans 24h.
+                Soyez vigilant sur vos réponses ! </p>
+        </div>
+    </div>
+{% endblock %}
+{% block body %}
+    <h3>Bonne Chance!</h3><br>
+   {#  <pre>
+        {{dump(questions)}}
+    </pre>#}
+<div class="container" data-aos="fade-up">
+
+    <form method="post" action="{{ path('quizResult' , {'id_eval' : questions[0].evaluation.id  }  )}}" name="formulaire" >
+           {% set i=0 %}
+        {% for question in questions %}
+             {%  set i=i+1 %}
+            <div id="{{ question.numQu }}">
+            <p><strong>{{"Question "~i}}<br>{{"---------------------------- "}}<br>{{ question.textQu }}</strong></p>
+                <input type="radio" id="choix1_{{ question.numQu }}" name="choix_{{ question.numQu }}" value="{{ question.choix1 }}" >
+                <label for="choix1_{{ question.numQu }}">{{ question.choix1 }}</label><br>
+                <input type="radio" id="choix2_{{ question.numQu }}" name="choix_{{ question.numQu }}" value="{{ question.choix2 }}" >
+                <label for="choix2_{{ question.numQu }}">{{ question.choix2 }}</label><br>
+                <input type="radio" id="choix3_{{ question.numQu }}" name="choix_{{ question.numQu }}" value="{{ question.choix3 }}" >
+                <label for="choix3_{{ question.numQu }}">{{ question.choix3 }}</label><br>
+                <input type="radio" id="choix4_{{ question.numQu }}" name="choix_{{ question.numQu }}" value="{{ question.choix4 }}" >
+                <label for="choix4_{{ question.numQu }}">{{ question.choix4 }}</label><br>
+                <br><br>
+            </div>
+        {% endfor %}
+        <div style="text-align: center;"> <a href="javascript: submitform()"  class="get-started-btn" >Valider</a></div><br><br>
+    </form>
+
+    <div> <a href="{{ path('afficheEval') }}" class="get-started-btn" ><< Retour</a></div>
+</div>
+    <script type="text/javascript">
+        function submitform() {   document.formulaire.submit(); }
+    </script>
+
+{% endblock %}
+

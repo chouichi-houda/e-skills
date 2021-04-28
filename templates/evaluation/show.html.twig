@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Evaluation{% endblock %}
+{% block search %}
+{% endblock %}
+
+{% block body %}
+    <h1>Evaluation</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Evaluation Nom</th>
+                <td>{{ evaluation.evalNom }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ evaluation.description }}</td>
+            </tr>
+            <tr>
+                <th>Formation</th>
+                <td>{{ evaluation.idForm.titre}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <div>
+    <form style="display:inline-block;" method="post" action="{{ path('evaluation_edit', {'evalNom': evaluation.evalNom}) }}" >
+        <button class="btn" style="background: #006DF0;color: #fff;" >edit</button>
+    </form>
+
+    {{ include('evaluation/_delete_form.html.twig') }}</div>
+<br><br>
+    <a href="{{ path('evaluation_index') }}"> << back to list</a>
+{% endblock %}

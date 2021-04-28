@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Question{% endblock %}
+{% block search %}
+{% endblock %}
+
+{% block body %}
+    <h1>Question</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Numéro Question</th>
+                <td>{{ question.numQu }}</td>
+            </tr>
+            <tr>
+                <th>Evaluation Nom</th>
+                <td>{{ question.evaluation }}</td>
+            </tr>
+            <tr>
+                <th>Text Question</th>
+                <td>{{ question.textQu }}</td>
+            </tr>
+            <tr>
+                <th>Choix1</th>
+                <td>{{ question.choix1 }}</td>
+            </tr>
+            <tr>
+                <th>Choix2</th>
+                <td>{{ question.choix2 }}</td>
+            </tr>
+            <tr>
+                <th>Choix3</th>
+                <td>{{ question.choix3 }}</td>
+            </tr>
+            <tr>
+                <th>Choix4</th>
+                <td>{{ question.choix4 }}</td>
+            </tr>
+            <tr>
+                <th>Reponse Correcte</th>
+                <td>{{ question.repCorr }}</td>
+            </tr>
+        </tbody>
+    </table>
+<div>
+    <form style="display:inline-block;" method="post" action="{{ path('question_edit', {'numQu': question.numQu}) }}" >
+        <button class="btn" style="background: #006DF0;color: #fff;" >edit</button>
+    </form>
+
+    {{ include('question/_delete_form.html.twig') }}<div>
+    <br><br>
+    <a href="{{ path('question_index') }}"> << back to list</a>
+{% endblock %}

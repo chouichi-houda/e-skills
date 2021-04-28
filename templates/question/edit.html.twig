@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+{% block title %}Edit Question{% endblock %}
+{% block search %}
+{% endblock %}
+
+{% block body %}
+
+<div class="single-pro-review-area mt-t-30 mg-b-15">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="product-payment-inner-st">
+                    <h1 style="color: #909090">Edit Question</h1>
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="review-content-section">
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <div class="devit-card-custom">
+                                               <p style="display:inline-block;">
+                                            {{ include('question/_form.html.twig', {'button_label': 'Update'}) }}<br>
+
+                                            {{ include('question/_delete_form.html.twig') }}</p>
+                                            <br><br>
+                                            <a href="{{ path('question_index') }}"> << back to list</a>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+

@@ -1,0 +1,42 @@
+{% extends 'front.html.twig' %}
+{% block title %}Passer le quizz suivant :{% endblock %}
+{% block baniere%}
+<div class="breadcrumbs" data-aos="fade-in">
+    <div class="container">
+        <h1>Quizzes</h1>
+        <h3>Tester vos compétences ! </h3>
+    </div>
+</div>
+{% endblock %}
+{% block body %}
+<br>
+    <div>
+        <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content">
+        <h4 style="padding-left: 30px">Listes de vos quizzes à passer </h4>
+
+    </div>
+    <br><br>
+    <div  class="container" data-aos="fade-up">
+        <div class="row" data-aos="zoom-in" data-aos-delay="100">
+            {% for evaluation in evaluations %}
+            <div class="col-lg-3 col-md-4">
+                <div class="icon-box">
+                    <i class="ri-file-list-3-line" style="color: #11dbcf;"></i>
+                    <h3><a href="{{ url('question_show1',{'id':evaluation.id}) }}">{{ evaluation.evalNom }}</a></h3>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <br><br><br>
+        <div class="row">
+            <div class="col-12">
+        <div style="text-align: center;">
+            {% do evaluations.setPageRange( ( evaluations.count / 3 ) +1 ) %}
+            {{ knp_pagination_render(evaluations , 'base/pagination.html.twig') }}
+        </div>
+    </div>
+</div>
+    </div>
+
+    </div>
+{% endblock %}

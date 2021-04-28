@@ -1,0 +1,85 @@
+{% extends 'base.html.twig' %}
+{% block menu %}
+
+{% endblock %}
+{% block search %}
+    <form method="post" action="{{ path('search_question') }}" role="search" class="sr-input-func">
+        <input type="text" id="search"  placeholder="Search..."  name="search" class="search-int form-control">
+        <a href="#"><i class="fa fa-search"></i></a>
+    </form>
+{% endblock %}
+
+{% block title %}Question index{% endblock %}
+
+{% block body %}
+    <h1>Questions List</h1>
+
+    <table class="table" id="tableac">
+        <thead>
+            <tr>
+                <th>Numéro Question</th>
+                <th>Nom Evaluation</th>
+                <th>Text Question</th>
+                <th>Choix1</th>
+                <th>Choix2</th>
+                <th>Choix3</th>
+                <th>Choix4</th>
+                <th>Reponse Correcte</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for question in questions %}
+            <tr>
+                <td>{{ question.numQu }}</td>
+                <td>{{ question.evaluation.evalNom}}</td>
+                <td>{{ question.textQu }}</td>
+                <td>{{ question.choix1 }}</td>
+                <td>{{ question.choix2 }}</td>
+                <td>{{ question.choix3 }}</td>
+                <td>{{ question.choix4 }}</td>
+                <td>{{ question.repCorr }}</td>
+                <td>
+                    <a href="{{ path('question_show', {'numQu': question.numQu}) }}">show</a>
+                    <a href="{{ path('question_edit', {'numQu': question.numQu}) }}"><button data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                $('#search').keyup(function(){
+                    search_table($(this).val());
+                });
+                function search_table(value){
+                    $('#tableac tbody tr').each(function(){
+                        var found = 'false';
+                        $(this).each(function(){
+                            if($(this).text().toLowerCase().indexOf(value.toLowerCase()) >= 0)
+                            {
+                                found = 'true';
+                            }
+                        });
+                        if(found === 'true')
+                        {
+                            $(this).show();
+
+                        }
+                        else
+                        {
+                            $(this).hide();
+
+                        }
+                    });
+                }
+            });
+        </script>
+    </table>
+
+    <a href="{{ path('question_new') }}">Create new</a>
+{% endblock %}
